@@ -1,0 +1,2195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformation Programme Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #0717c1;
+            --primary-pink: #ff4676;
+            --white: #ffffff;
+            --gray: #7F7F7F;
+            --black: #000000;
+            --success-green: #10b981;
+            --warning-amber: #f59e0b;
+            --alert-red: #ef4444;
+            --neutral-100: #f8f9fa;
+            --neutral-200: #e9ecef;
+            --neutral-300: #dee2e6;
+            --neutral-700: #495057;
+            --neutral-800: #343a40;
+            --neutral-900: #212529;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--neutral-100);
+            color: var(--neutral-900);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--white);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #0512a3 100%);
+            color: var(--white);
+            padding: 60px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='80' height='92' viewBox='0 0 80 92' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0L80 23v46L40 92 0 69V23z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E") repeat;
+            opacity: 0.4;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .differentis-logo {
+            height: 60px;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+            font-weight: 300;
+            margin-bottom: 10px;
+        }
+
+        .meta {
+            font-size: 0.9em;
+            opacity: 0.7;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .tabs {
+            display: flex;
+            background: var(--neutral-100);
+            padding: 0;
+            gap: 0;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 20px;
+            background: var(--neutral-200);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1em;
+            transition: all 0.3s;
+            border-bottom: 4px solid transparent;
+        }
+
+        .tab.active {
+            background: var(--white);
+            color: var(--primary-blue);
+            border-bottom-color: var(--primary-blue);
+        }
+
+        .tab:hover:not(.active) {
+            background: var(--neutral-300);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 40px 80px;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Section Banner - same style for all tabs */
+        .section-banner {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #0512a3 100%);
+            color: var(--white);
+            padding: 30px 40px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='80' height='92' viewBox='0 0 80 92' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0L80 23v46L40 92 0 69V23z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E") repeat;
+            opacity: 0.4;
+        }
+
+        .section-banner-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-banner h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .section-banner p {
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .intro-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border: 2px solid var(--neutral-200);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .intro-section h2 {
+            color: var(--primary-blue);
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .intro-section p {
+            margin-bottom: 15px;
+            color: var(--neutral-700);
+            line-height: 1.8;
+        }
+
+        .category-section {
+            margin-bottom: 40px;
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, var(--primary-pink) 0%, #ff2461 100%);
+            color: var(--white);
+            padding: 20px 30px;
+            border-radius: 8px 8px 0 0;
+            font-weight: 700;
+            font-size: 1.3em;
+            letter-spacing: 0.5px;
+        }
+
+        .bricks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 30px;
+            background: var(--white);
+            border: 2px solid var(--neutral-200);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .brick {
+            padding: 25px;
+            border: 3px solid var(--neutral-300);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--white);
+        }
+
+        .brick:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(7, 23, 193, 0.2);
+        }
+
+        .brick.selected {
+            border-color: var(--primary-blue);
+            background: var(--primary-blue);
+            color: var(--white);
+            box-shadow: 0 6px 16px rgba(7, 23, 193, 0.3);
+        }
+
+        .brick.selected .brick-name {
+            color: var(--white);
+        }
+
+        .brick.selected .brick-count {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .brick-name {
+            font-weight: 700;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+
+        .brick-count {
+            font-size: 0.9em;
+            color: var(--gray);
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .question-area {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border: 3px solid var(--neutral-200);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .area-label {
+            color: var(--primary-pink);
+            font-weight: 700;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: var(--neutral-900);
+            line-height: 1.5;
+        }
+
+        .score-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .score-option {
+            padding: 25px 20px;
+            border: 3px solid var(--neutral-300);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            background: var(--white);
+        }
+
+        .score-option:hover {
+            border-color: var(--primary-blue);
+            background: #f0f4ff;
+            transform: translateY(-2px);
+        }
+
+        .score-option.selected {
+            border-color: var(--primary-blue);
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .score-label {
+            font-weight: 700;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .score-description {
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .progress-container {
+            margin-bottom: 30px;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--gray);
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .progress-bar {
+            background: var(--neutral-200);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--primary-blue), var(--primary-pink));
+            height: 100%;
+            transition: width 0.4s;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #0512a3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(7, 23, 193, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary-blue);
+            border: 3px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .btn:disabled {
+            background: var(--neutral-300);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .selection-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 50px;
+            border-radius: 16px;
+            max-width: 550px;
+            width: 90%;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        .modal-description {
+            color: var(--gray);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--neutral-900);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--neutral-300);
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: 'Montserrat', sans-serif;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .form-input.error {
+            border-color: var(--alert-red);
+        }
+
+        .error-message {
+            color: var(--alert-red);
+            font-size: 0.85em;
+            margin-top: 5px;
+        }
+
+        /* Results Styles */
+        .results-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .summary-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border: 3px solid var(--neutral-200);
+            border-radius: 12px;
+            padding: 35px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .summary-label {
+            font-size: 0.9em;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .summary-score {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin: 15px 0;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .summary-subscore {
+            font-size: 1.1em;
+            color: var(--gray);
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .rag-green { color: var(--success-green); }
+        .rag-amber { color: var(--warning-amber); }
+        .rag-red { color: var(--alert-red); }
+
+        .rag-legend {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+            padding: 30px;
+            background: var(--neutral-100);
+            border-radius: 12px;
+            flex-wrap: wrap;
+        }
+
+        .rag-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .rag-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+        }
+
+        .rag-color.green { background: var(--success-green); }
+        .rag-color.amber { background: var(--warning-amber); }
+        .rag-color.red { background: var(--alert-red); }
+
+        .brick-wall {
+            background: var(--white);
+            border: 3px solid var(--neutral-200);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .wall-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 35px;
+            color: var(--primary-blue);
+        }
+
+        .wall-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            align-items: start;
+        }
+
+        .wall-column {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .wall-category-label {
+            font-weight: 700;
+            font-size: 0.75em;
+            text-align: center;
+            padding: 12px 8px;
+            background: var(--primary-blue);
+            color: var(--white);
+            border-radius: 8px 8px 0 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .wall-brick {
+            padding: 18px 12px;
+            text-align: center;
+            font-size: 0.8em;
+            font-weight: 600;
+            color: var(--white);
+            transition: all 0.3s;
+            cursor: pointer;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .wall-brick:first-of-type {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .wall-brick:last-child {
+            border-radius: 0 0 8px 8px;
+            border-bottom: none;
+        }
+
+        .wall-brick:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .category-results {
+            background: var(--white);
+            border: 3px solid var(--neutral-200);
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 30px;
+        }
+
+        .category-name {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--primary-blue);
+            border-bottom: 3px solid var(--neutral-200);
+            padding-bottom: 15px;
+        }
+
+        .brick-results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .brick-result {
+            padding: 20px;
+            background: var(--neutral-100);
+            border-radius: 8px;
+            border-left: 5px solid var(--neutral-300);
+            transition: all 0.3s;
+        }
+
+        .brick-result:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .brick-result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .brick-result-name {
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        .brick-result-score {
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 700;
+            font-size: 1.3em;
+        }
+
+        @media print {
+            .tabs, .navigation-buttons, .btn, .selection-buttons {
+                display: none !important;
+            }
+            .tab-content {
+                display: block !important;
+                page-break-after: always;
+            }
+            .header {
+                background: var(--primary-blue) !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 40px 20px;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+            .tab-content {
+                padding: 20px;
+            }
+            .tabs {
+                flex-direction: column;
+            }
+            .bricks-grid {
+                grid-template-columns: 1fr;
+            }
+            .score-options {
+                grid-template-columns: 1fr;
+            }
+            .wall-container {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAAC5CAIAAADxk6dZAAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAB2LUlEQVR4nOz9d7hkx3Ufiv7Wqqq9O5w0OScMZjCIg5xJMIukRJEUKVGWRMtP0bTkZ1+9q2vLn+3v+n66z5bDfdeyfWXZClQiJQaREimJpEgwIeccZgDMAJPTid29666qtd4ftbtPnzOBGAgDYPhxfT09fTrsULVqxd9aRTjPyQARgAUIAKCApA8YKiBAYEANZSMxAl1AzfzPnaCtGAGWAVvQ3m5WbBlbvrY1urQ5MtZoNbIcQFGVc0XvRNk50p3bPX3k6XDkeXROAB2ga1AogPrsJqIBMBBAJasQwIACxIgCADx0nWH+5flL9HpfwN+Z6KTn/oRwljEjFBUEBsiJlckbBB+NYmmex7JsAxsx+uZLrrxyw9blJl+RtZfarKUmE8rBhllVo4iHlKxd6IlYHCt7R2Pvsf17v/nkgy9ipgdwo3ms6AXAOeOCqmoFjQAYtpGpUizLBResQ9d5XrPPec9ABBhAYSIMIEAElOpJIoUBmA05LiVANb3vIiYUy4E3N7f+0FU3X7J8fVb5ps0MwxhDKhQFIZCPHJWZlRAMkTNqjACqJNC5ogwN++TRA198+K5v9XYfBaYZpekzBFHOVr2IxAgo11xDAgMwEIFoAEpX/PoO4t+Jzn8GYkBhpFZiAnhAAWuthjDPVQwYgLhdyTLgupGN77/ihptXbV1RmVFPlDfQ64IlMpQBwIBIFKIgBgEEJUSFUZAAapDnUhYdh2MNuePwc1969N57Z/ecAGYcAYq4gFdgTIyRgKwvgAIQuf/x9xnodSVO/6XpMQBBAlABZI2qIooBLLOHjAuux9gHd9z4piuuWWrzbK5qR3Zeqm4nzxtQUagSmBmk9byKgCidQCNUNTFUVZa23faOu1b9aH4ilHc8+uDnn7r7TkxNM6xSVE2yh5k1xHRtAEegWsAz8hqP16tL5z0DERj9+bCAAQykniQCgMw4F3wOLEHjyvaqf3LDuy5qjLUabS1LhNi2OVuHECAKVUSBKnh4fgVEYAYAZaiCCAQYA2skhjlfwBrTzLu98tlq+j/f85WHZw8fR7cCvMvKUAEgrZlbwAEI9ZUDgH6fgV5vYtSCZ6ANBAARoDCGXNQ2sArmQ1tu+sg1b94gtlFUEIBUVWOMJEpElg1IOGkuJNcpCR4CMM83lE6gIaqICMEYw8wAiE3RcPtM/LMHvvXZZu4601l0V5SBJINQWNEQXJDPACdL/yurlFgPCmL0h==" class="differentis-logo" alt="Differentis Logo">
+                <h1>Transformation Programme Assessment</h1>
+                <p class="subtitle">A comprehensive evaluation framework for digital transformation excellence</p>
+                <div class="meta">Enterprise Assessment Tool • 0-3 Scoring • Version 2.0</div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab(0)">1. Select Assessment Areas</button>
+            <button class="tab" onclick="switchTab(1)">2. Conduct Assessment</button>
+            <button class="tab" onclick="switchTab(2)">3. Assessment Results</button>
+        </div>
+
+        <!-- Tab 1: Select Bricks -->
+        <div class="tab-content active" id="tab1">
+            <div class="section-banner">
+                <div class="section-banner-content">
+                    <h2>Select Assessment Areas</h2>
+                    <p>Choose the specific areas of your transformation programme you wish to evaluate. Each area contains targeted questions designed to assess maturity and identify improvement opportunities.</p>
+                </div>
+            </div>
+
+            <div class="selection-buttons">
+                <button class="btn btn-secondary" onclick="selectAllBricks()">Select All</button>
+                <button class="btn btn-secondary" onclick="deselectAllBricks()">Deselect All</button>
+            </div>
+
+            <div id="bricksContainer"></div>
+
+            <div class="selection-buttons">
+                <button class="btn btn-secondary" onclick="selectAllBricks()">Select All</button>
+                <button class="btn btn-secondary" onclick="deselectAllBricks()">Deselect All</button>
+            </div>
+
+            <div class="navigation-buttons">
+                <div></div>
+                <button class="btn btn-primary" onclick="startAssessment()">Start Assessment →</button>
+            </div>
+        </div>
+
+        <!-- Tab 2: Assessment -->
+        <div class="tab-content" id="tab2">
+            <div class="section-banner">
+                <div class="section-banner-content">
+                    <h2>Conduct Assessment</h2>
+                    <p>Answer each question honestly based on your current state. Use the scoring guide to select the most accurate response. Your progress is automatically saved.</p>
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-text">Question <span id="currentQ">0</span> of <span id="totalQ">0</span></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div id="questionContainer"></div>
+
+            <div class="navigation-buttons">
+                <button class="btn btn-secondary" onclick="previousQuestion()">← Previous</button>
+                <button class="btn btn-primary" onclick="nextQuestion()">Next →</button>
+                <button class="btn btn-primary" id="finishButton" style="display:none;" onclick="showContactModal()">Finish Assessment</button>
+            </div>
+        </div>
+
+        <!-- Contact Details Modal -->
+        <div class="modal" id="contactModal">
+            <div class="modal-content">
+                <div class="modal-header">Before Viewing Your Results</div>
+                <div class="modal-description">Please provide your contact details to access your comprehensive assessment results and recommendations.</div>
+                
+                <form id="contactForm" onsubmit="submitContact(event)">
+                    <div class="form-group">
+                        <label class="form-label" for="userName">Name *</label>
+                        <input type="text" id="userName" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="userEmail">Email *</label>
+                        <input type="email" id="userEmail" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="userCompany">Company</label>
+                        <input type="text" id="userCompany" class="form-input">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="userPhone">Phone</label>
+                        <input type="tel" id="userPhone" class="form-input">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">View Results →</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tab 3: Results -->
+        <div class="tab-content" id="tab3">
+            <div class="section-banner">
+                <div class="section-banner-content">
+                    <h2>Assessment Results</h2>
+                    <p>Your comprehensive transformation programme assessment results. Review your scores, identify strengths and improvement areas, and export your results for further analysis.</p>
+                </div>
+            </div>
+
+            <div class="results-actions">
+                <button class="btn btn-secondary" onclick="window.print()">Print Results</button>
+                <button class="btn btn-primary" onclick="exportResults()">Export Results (JSON)</button>
+            </div>
+
+            <div id="resultsContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        const bricks = [
+        {
+                "id": "brick_0",
+                "name": "Vision & Strategy",
+                "category": "Business Direction",
+                "questions": [
+                        {
+                                "text": "Is there a clearly defined digital transformation vision with measurable Objectives & Key Results (OKRs)?",
+                                "scoreLabels": {
+                                        "0": "No vision or OKRs defined",
+                                        "1": "Vision exists but no OKRs",
+                                        "2": "Vision with some OKRs defined",
+                                        "3": "Vision with tracked OKRs reviewed regularly"
+                                }
+                        },
+                        {
+                                "text": "Are transformation goals aligned with overall business strategy and communicated organisation-wide?",
+                                "scoreLabels": {
+                                        "0": "No alignment with strategy",
+                                        "1": "Some alignment but not communicated",
+                                        "2": "Aligned, communicated to leadership",
+                                        "3": "Fully aligned, embedded in all activities"
+                                }
+                        },
+                        {
+                                "text": "Is there executive sponsorship at C-level with clear accountability?",
+                                "scoreLabels": {
+                                        "0": "No executive sponsorship",
+                                        "1": "Sponsor identified but passive",
+                                        "2": "Active sponsor without clear accountability",
+                                        "3": "C-level sponsor with defined accountability"
+                                }
+                        },
+                        {
+                                "text": "Are success metrics defined, tracked, and regularly reviewed?",
+                                "scoreLabels": {
+                                        "0": "No success metrics defined",
+                                        "1": "Some metrics defined but not tracked",
+                                        "2": "Metrics tracked but not reviewed",
+                                        "3": "Metrics tracked, reviewed monthly, acted upon"
+                                }
+                        },
+                        {
+                                "text": "Is the vision adaptable to market changes and emerging technologies?",
+                                "scoreLabels": {
+                                        "0": "Fixed vision, no adaptability",
+                                        "1": "Vision reviewed annually",
+                                        "2": "Vision adjusted when major changes occur",
+                                        "3": "Vision reviewed quarterly for relevance"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_1",
+                "name": "Programme Business Requirements",
+                "category": "Business Direction",
+                "questions": [
+                        {
+                                "text": "Do you know what the business looks like now, and what it will look like after the transformation?",
+                                "scoreLabels": {
+                                        "0": "No understanding of current/future state",
+                                        "1": "Basic current state documented",
+                                        "2": "Current state clear, future state drafted",
+                                        "3": "Comprehensive as-is/to-be with gap analysis"
+                                }
+                        },
+                        {
+                                "text": "Is there a documented business process model?",
+                                "scoreLabels": {
+                                        "0": "No process model exists",
+                                        "1": "Some processes documented informally",
+                                        "2": "Key processes documented",
+                                        "3": "Full process model maintained and updated"
+                                }
+                        },
+                        {
+                                "text": "Have the requirements for the transformation been documented and agreed?",
+                                "scoreLabels": {
+                                        "0": "No requirements documented",
+                                        "1": "Requirements gathered but not agreed",
+                                        "2": "Requirements documented, partial agreement",
+                                        "3": "Requirements documented and agreed, with full visibility to other phases (Design, Testing) and under formal change control"
+                                }
+                        },
+                        {
+                                "text": "Is there a cost / benefit case for the programme?",
+                                "scoreLabels": {
+                                        "0": "No business case exists",
+                                        "1": "High-level cost/benefit estimated",
+                                        "2": "Business case drafted",
+                                        "3": "Business case tracked and updated regularly"
+                                }
+                        },
+                        {
+                                "text": "Is it clear who is responsible for delivering benefits?",
+                                "scoreLabels": {
+                                        "0": "No benefit ownership assigned",
+                                        "1": "Benefit owners identified",
+                                        "2": "Owners assigned with awareness",
+                                        "3": "Owners actively managing realisation"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_2",
+                "name": "Scope Management",
+                "category": "Programme Delivery",
+                "questions": [
+                        {
+                                "text": "Is the scope of the Programme documented and agreed with stakeholders?",
+                                "scoreLabels": {
+                                        "0": "No scope documentation",
+                                        "1": "Scope exists but not documented",
+                                        "2": "Scope documented but not agreed",
+                                        "3": "Scope documented and agreed with stakeholders"
+                                }
+                        },
+                        {
+                                "text": "Are in-scope, out-of-scope, and grey areas clearly defined, regularly reviewed, and managed through formal change control?",
+                                "scoreLabels": {
+                                        "0": "In/out scope unclear",
+                                        "1": "In-scope defined, others unclear",
+                                        "2": "In/out scope defined, grey areas remain",
+                                        "3": "All areas clearly defined and documented"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_3",
+                "name": "Baseline Management",
+                "category": "Programme Delivery",
+                "questions": [
+                        {
+                                "text": "Has a Programme Baseline been defined, documented, and agreed across the programme?",
+                                "scoreLabels": {
+                                        "0": "No baseline defined",
+                                        "1": "Some baseline items identified",
+                                        "2": "Baseline defined but incomplete",
+                                        "3": "Complete baseline defined and documented"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_4",
+                "name": "Release Management",
+                "category": "Programme Delivery",
+                "questions": [
+                        {
+                                "text": "Have releases been defined to group Programme results for phased business integration?",
+                                "scoreLabels": {
+                                        "0": "No releases defined",
+                                        "1": "Single big-bang release planned",
+                                        "2": "Multiple releases identified",
+                                        "3": "Release strategy optimised for value delivery"
+                                }
+                        },
+                        {
+                                "text": "Do releases cover the full scope of the Programme?",
+                                "scoreLabels": {
+                                        "0": "Releases don't cover scope",
+                                        "1": "Partial scope covered",
+                                        "2": "Most scope covered by releases",
+                                        "3": "Release coverage validated continuously"
+                                }
+                        },
+                        {
+                                "text": "Are releases specified in terms of component projects and deliverables?",
+                                "scoreLabels": {
+                                        "0": "Release content not specified",
+                                        "1": "High-level release content",
+                                        "2": "Releases mapped to projects",
+                                        "3": "Detailed release specifications maintained"
+                                }
+                        },
+                        {
+                                "text": "Are releases internally consistent, deliverable, and absorbable by the business?",
+                                "scoreLabels": {
+                                        "0": "Releases not validated",
+                                        "1": "Technical validation only",
+                                        "2": "Partial business validation",
+                                        "3": "Releases internally consistent and deliverable"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_5",
+                "name": "Programme Planning & Assurance",
+                "category": "Programme Delivery",
+                "questions": [
+                        {
+                                "text": "Are Programme Plans in place covering scope, releases, timescales, costs, and assumptions?",
+                                "scoreLabels": {
+                                        "0": "No programme plans exist",
+                                        "1": "High-level plan only",
+                                        "2": "Plans cover some elements",
+                                        "3": "Integrated plans continuously maintained"
+                                }
+                        },
+                        {
+                                "text": "Do plans include dependencies (external and between projects) and performance targets?",
+                                "scoreLabels": {
+                                        "0": "Dependencies not identified",
+                                        "1": "Some dependencies known informally",
+                                        "2": "Dependencies identified but not managed",
+                                        "3": "Dependencies included in plans"
+                                }
+                        },
+                        {
+                                "text": "Have plans been validated by the Programme team and agreed by the Board?",
+                                "scoreLabels": {
+                                        "0": "Plans not validated",
+                                        "1": "Plans validated by PM only",
+                                        "2": "Team validation but no board approval",
+                                        "3": "Plans continuously validated and communicated to  stakeholders"
+                                }
+                        },
+                        {
+                                "text": "Do plans enable progress monitoring relative to baseline?",
+                                "scoreLabels": {
+                                        "0": "No monitoring capability",
+                                        "1": "Basic progress tracking",
+                                        "2": "Monitoring against milestones",
+                                        "3": "Integrated monitoring with forecasting"
+                                }
+                        },
+                        {
+                                "text": "Is there a process for reviewing plans regularly and implementing authorised changes?",
+                                "scoreLabels": {
+                                        "0": "Plans never updated",
+                                        "1": "Updates when crisis occurs",
+                                        "2": "Periodic updates",
+                                        "3": "Regular reviews with authorised changes"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_6",
+                "name": "Governance",
+                "category": "Programme Delivery",
+                "questions": [
+                        {
+                                "text": "Is there a governance framework that enables rather than blocks agility?",
+                                "scoreLabels": {
+                                        "0": "No governance framework",
+                                        "1": "Traditional waterfall governance only",
+                                        "2": "Governance allows some flexibility",
+                                        "3": "Governance optimised for flow and speed"
+                                }
+                        },
+                        {
+                                "text": "Are decision-making rights clearly defined with appropriate delegation?",
+                                "scoreLabels": {
+                                        "0": "Decision rights unclear",
+                                        "1": "Centralised decision-making only",
+                                        "2": "Some delegation but unclear boundaries",
+                                        "3": "Decision rights clearly defined and delegated"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_7",
+                "name": "Quality Management",
+                "category": "Programme Delivery",
+                "questions": [
+                        {
+                                "text": "Is there a Quality Plan for the programme and individual projects?",
+                                "scoreLabels": {
+                                        "0": "No quality plan",
+                                        "1": "Basic quality checklist",
+                                        "2": "Quality plan for programme only",
+                                        "3": "Quality plans for programme and projects"
+                                }
+                        },
+                        {
+                                "text": "Are Quality Audits defined, scheduled, and regularly conducted?",
+                                "scoreLabels": {
+                                        "0": "No quality audits",
+                                        "1": "Ad-hoc audits when issues arise",
+                                        "2": "Audits scheduled but inconsistent",
+                                        "3": "Continuous quality monitoring and audits"
+                                }
+                        },
+                        {
+                                "text": "Is a Quality Improvement process defined and actively followed?",
+                                "scoreLabels": {
+                                        "0": "No improvement process",
+                                        "1": "Improvement ideas captured",
+                                        "2": "Improvement process defined",
+                                        "3": "Continuous improvement culture embedded"
+                                }
+                        },
+                        {
+                                "text": "Are quality standards and acceptance criteria clearly documented?",
+                                "scoreLabels": {
+                                        "0": "No standards or criteria",
+                                        "1": "Informal quality expectations",
+                                        "2": "Standards exist but not documented",
+                                        "3": "Standards continuously refined and communicated"
+                                }
+                        },
+                        {
+                                "text": "Is quality integrated into all stages of delivery (not just  testing)?",
+                                "scoreLabels": {
+                                        "0": "No quality integration",
+                                        "1": "Testing at end only",
+                                        "2": "Quality checks at key stages",
+                                        "3": "Quality built into all delivery stages"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_8",
+                "name": "Business Integration",
+                "category": "Programme Delivery",
+                "questions": [
+                        {
+                                "text": "Is there a process for assessing the business ability to deliver or absorb change?",
+                                "scoreLabels": {
+                                        "0": "No readiness assessment",
+                                        "1": "Ad-hoc readiness discussions",
+                                        "2": "Basic readiness assessment",
+                                        "3": "Continuous readiness monitoring and support"
+                                }
+                        },
+                        {
+                                "text": "Are all activities required for business readiness and acceptance of releases identified?",
+                                "scoreLabels": {
+                                        "0": "Activities not identified",
+                                        "1": "Some training activities identified",
+                                        "2": "Most activities identified",
+                                        "3": "All activities managed proactively"
+                                }
+                        },
+                        {
+                                "text": "Are dependencies between business and change projects actively managed?",
+                                "scoreLabels": {
+                                        "0": "Dependencies not identified",
+                                        "1": "Dependencies known informally",
+                                        "2": "Dependencies documented",
+                                        "3": "Integrated dependency management process in place"
+                                }
+                        },
+                        {
+                                "text": "Is benefit realisation measured as releases are integrated into the business?",
+                                "scoreLabels": {
+                                        "0": "No benefit measurement",
+                                        "1": "Benefit measurement planned",
+                                        "2": "Ad-hoc benefit tracking",
+                                        "3": "Formal benefit tracking process in place"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_9",
+                "name": "Communication Management",
+                "category": "Programme Delivery",
+                "questions": [
+                        {
+                                "text": "Have target audiences been identified (programme team, business, external)?",
+                                "scoreLabels": {
+                                        "0": "Audiences not identified",
+                                        "1": "Basic stakeholder list",
+                                        "2": "Key audiences identified",
+                                        "3": "Comprehensive stakeholder mapping maintained"
+                                }
+                        },
+                        {
+                                "text": "Is there a communication plan with schedule and defined channels?",
+                                "scoreLabels": {
+                                        "0": "No communication plan",
+                                        "1": "Ad-hoc communications",
+                                        "2": "Basic communication plan",
+                                        "3": "Detailed plan with schedule across  channels"
+                                }
+                        },
+                        {
+                                "text": "Is consistency of message maintained across Programme, and related initiatives?",
+                                "scoreLabels": {
+                                        "0": "No message consistency",
+                                        "1": "Inconsistent messaging",
+                                        "2": "Some coordination of messages",
+                                        "3": "Consistent messaging actively managed"
+                                }
+                        },
+                        {
+                                "text": "Have stakeholders been asked what they want to know about?",
+                                "scoreLabels": {
+                                        "0": "No stakeholder input",
+                                        "1": "Informal feedback",
+                                        "2": "Some stakeholder consultation",
+                                        "3": "Continuous stakeholder feedback loops"
+                                }
+                        },
+                        {
+                                "text": "Are there regular forums for project managers and teams to communicate?",
+                                "scoreLabels": {
+                                        "0": "No regular forums",
+                                        "1": "Occasional meetings",
+                                        "2": "Monthly forums established",
+                                        "3": "Comprehensive communication rhythm across teams"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_10",
+                "name": "Project Planning",
+                "category": "Project Delivery",
+                "questions": [
+                        {
+                                "text": "Have Project Planning processes been defined and procedures created?",
+                                "scoreLabels": {
+                                        "0": "No planning processes",
+                                        "1": "Ad-hoc planning approaches",
+                                        "2": "Basic planning process defined",
+                                        "3": "Standardised planning with continuous improvement"
+                                }
+                        },
+                        {
+                                "text": "Do all projects have up-to-date plans that reflect the current agreed plan?",
+                                "scoreLabels": {
+                                        "0": "No project plans",
+                                        "1": "Outdated plans exist",
+                                        "2": "Some projects have current plans",
+                                        "3": "Plans continuously maintained and reviewed"
+                                }
+                        },
+                        {
+                                "text": "Are there agreed conditions for revising project plans?",
+                                "scoreLabels": {
+                                        "0": "No revision process",
+                                        "1": "Plans revised arbitrarily",
+                                        "2": "Informal revision process",
+                                        "3": "Formal change control for plan revisions"
+                                }
+                        },
+                        {
+                                "text": "Do plans include effort estimates, resource allocation, and dependencies?",
+                                "scoreLabels": {
+                                        "0": "Plans lack detail",
+                                        "1": "High-level estimates only",
+                                        "2": "Estimates and resources included",
+                                        "3": "Comprehensive plans with resources and  dependencies"
+                                }
+                        },
+                        {
+                                "text": "Are project plans consistent with the overall Programme Plan?",
+                                "scoreLabels": {
+                                        "0": "No programme alignment",
+                                        "1": "Minimal alignment",
+                                        "2": "Partial alignment to programme",
+                                        "3": "Full alignment with programme plan"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_11",
+                "name": "Monitoring & Control",
+                "category": "Project Delivery",
+                "questions": [
+                        {
+                                "text": "Are processes in place for monitoring progress against plan (status, performance, integration)?",
+                                "scoreLabels": {
+                                        "0": "No monitoring processes",
+                                        "1": "Ad-hoc status updates",
+                                        "2": "Basic monitoring in place",
+                                        "3": "Integrated monitoring across all dimensions"
+                                }
+                        },
+                        {
+                                "text": "Is there high-level reporting of overall cost and timescale trends?",
+                                "scoreLabels": {
+                                        "0": "No high-level reporting",
+                                        "1": "Basic status reports",
+                                        "2": "Cost and schedule reported separately",
+                                        "3": "Integrated cost and schedule reporting in place"
+                                }
+                        },
+                        {
+                                "text": "Are budgetary control processes and systems in place?",
+                                "scoreLabels": {
+                                        "0": "No budget control",
+                                        "1": "Basic budget tracking",
+                                        "2": "Budget control process defined",
+                                        "3": "Integrated financial management process in place"
+                                }
+                        },
+                        {
+                                "text": "Is there a process for defining and implementing corrective actions?",
+                                "scoreLabels": {
+                                        "0": "No corrective action process",
+                                        "1": "Corrective actions ad-hoc",
+                                        "2": "Process defined but inconsistent",
+                                        "3": "Proactive issue resolution with escalation"
+                                }
+                        },
+                        {
+                                "text": "Are performance reports validated by the Programme Manager before presentation?",
+                                "scoreLabels": {
+                                        "0": "No report validation",
+                                        "1": "Self-reported by projects",
+                                        "2": "PM reviews some reports",
+                                        "3": "Multi-level validation with quality assurance"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_12",
+                "name": "Methods, Tools & Standards",
+                "category": "Project Delivery",
+                "questions": [
+                        {
+                                "text": "Are Programme-level methods, tools, and standards defined, accepted, and consistently applied across all projects?",
+                                "scoreLabels": {
+                                        "0": "No standards defined",
+                                        "1": "Basic guidelines exist",
+                                        "2": "Some standards documented",
+                                        "3": "Standards continuously refined and enforced"
+                                }
+                        },
+                        {
+                                "text": "Is there a defined approach for different project types (waterfall, agile, hybrid)?",
+                                "scoreLabels": {
+                                        "0": "One-size-fits-all approach",
+                                        "1": "Awareness of different approaches",
+                                        "2": "Multiple approaches available",
+                                        "3": "Defined approaches for different types"
+                                }
+                        },
+                        {
+                                "text": "Are tools integrated to provide consolidated reporting and visibility?",
+                                "scoreLabels": {
+                                        "0": "No tool integration",
+                                        "1": "Disparate tools used",
+                                        "2": "Some tools integrated",
+                                        "3": "Core tools integrated for reporting"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_13",
+                "name": "Resource Management",
+                "category": "Project Delivery",
+                "questions": [
+                        {
+                                "text": "Are projects resourced to necessary levels (numbers and skills mix)?",
+                                "scoreLabels": {
+                                        "0": "Inadequate resourcing",
+                                        "1": "Partial resourcing",
+                                        "2": "Most projects adequately resourced",
+                                        "3": "Optimised resource allocation across portfolio"
+                                }
+                        },
+                        {
+                                "text": "Are processes defined for requesting, prioritising, and allocating resources?",
+                                "scoreLabels": {
+                                        "0": "No resource processes",
+                                        "1": "Ad-hoc resource allocation",
+                                        "2": "Basic request process",
+                                        "3": "Defined processes for resource management"
+                                }
+                        },
+                        {
+                                "text": "Do all projects have named project managers with appropriate authority?",
+                                "scoreLabels": {
+                                        "0": "No designated PMs",
+                                        "1": "PMs assigned but no authority",
+                                        "2": "PMs with limited authority",
+                                        "3": "Empowered PMs with clear accountability"
+                                }
+                        },
+                        {
+                                "text": "Is there visibility of resource utilisation across the programme?",
+                                "scoreLabels": {
+                                        "0": "No visibility",
+                                        "1": "Project-level visibility only",
+                                        "2": "Partial programme visibility",
+                                        "3": "Comprehensive resource dashboards / reporting in place"
+                                }
+                        },
+                        {
+                                "text": "Are skills gaps identified and addressed through hiring or training?",
+                                "scoreLabels": {
+                                        "0": "Skills gaps not identified",
+                                        "1": "Gaps known but not addressed",
+                                        "2": "Ad-hoc hiring/training",
+                                        "3": "Proactive workforce planning and development"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_14",
+                "name": "Architecture",
+                "category": "Technical Foundation",
+                "questions": [
+                        {
+                                "text": "Are architectural decisions documented and aligned to business capabilities?",
+                                "scoreLabels": {
+                                        "0": "No documentation",
+                                        "1": "Ad-hoc documentation",
+                                        "2": "Some architectural decisions documented",
+                                        "3": "Architectural decisions integrated with programme governance"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_15",
+                "name": "Data & AI Strategy",
+                "category": "Technical Foundation",
+                "questions": [
+                        {
+                                "text": "Is there a data strategy with clear data governance and ownership?",
+                                "scoreLabels": {
+                                        "0": "No data strategy",
+                                        "1": "Ad-hoc data management",
+                                        "2": "Data strategy in development",
+                                        "3": "Data strategy with clear governance"
+                                }
+                        },
+                        {
+                                "text": "Is there capability to leverage AI/ML for business outcomes?",
+                                "scoreLabels": {
+                                        "0": "No AI/ML capability",
+                                        "1": "Exploring AI/ML options",
+                                        "2": "Pilot AI/ML projects",
+                                        "3": "AI/ML embedded across operations"
+                                }
+                        },
+                        {
+                                "text": "Is data quality actively managed?",
+                                "scoreLabels": {
+                                        "0": "No quality management",
+                                        "1": "Basic data quality checks",
+                                        "2": "Data quality monitored",
+                                        "3": "Comprehensive  data quality systems "
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_16",
+                "name": "Value Delivery",
+                "category": "Change Enablement & Business Value",
+                "questions": [
+                        {
+                                "text": "Are business outcomes clearly defined and measured (not just outputs)?",
+                                "scoreLabels": {
+                                        "0": "Focus on outputs only",
+                                        "1": "Some outcome thinking",
+                                        "2": "Outcomes defined",
+                                        "3": "Outcome-driven with continuous measurement"
+                                }
+                        },
+                        {
+                                "text": "Is value delivery incremental with regular releases to production?",
+                                "scoreLabels": {
+                                        "0": "Big-bang releases only",
+                                        "1": "Infrequent large releases",
+                                        "2": "Quarterly releases",
+                                        "3": "Monthly or more frequent releases"
+                                }
+                        },
+                        {
+                                "text": "Are benefits being actively tracked against the business case?",
+                                "scoreLabels": {
+                                        "0": "No benefit tracking",
+                                        "1": "Benefits identified only",
+                                        "2": "Ad-hoc benefit tracking",
+                                        "3": "Comprehensive benefit tracking in place"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_17",
+                "name": "Risk Management",
+                "category": "Programme Delivery",
+                "questions": [
+                        {
+                                "text": "Are risks actively identified, assessed, and tracked with owners?",
+                                "scoreLabels": {
+                                        "0": "No risk management",
+                                        "1": "Risks identified ad-hoc",
+                                        "2": "Basic risk register",
+                                        "3": "Active risk management with owners"
+                                }
+                        },
+                        {
+                                "text": "Is there a risk-based approach to decision making?",
+                                "scoreLabels": {
+                                        "0": "No risk consideration",
+                                        "1": "Risks mentioned in decisions",
+                                        "2": "Some risk-based decisions",
+                                        "3": "Risk intelligence embedded in decisions"
+                                }
+                        },
+                        {
+                                "text": "Are dependencies across teams and systems visible and managed?",
+                                "scoreLabels": {
+                                        "0": "Dependencies not identified",
+                                        "1": "Some dependencies known",
+                                        "2": "Dependencies documented",
+                                        "3": "Dependencies visible and managed"
+                                }
+                        },
+                        {
+                                "text": "Are post-project reviews conducted with blameless culture?",
+                                "scoreLabels": {
+                                        "0": "No  reviews take place",
+                                        "1": "Blame-focused reviews",
+                                        "2": "Some blameless reviews",
+                                        "3": "Strong learning from project delivery "
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_18",
+                "name": "Vendor & Partnerships",
+                "category": "Ecosystem, Sustainability & ESG",
+                "questions": [
+                        {
+                                "text": "Are vendor relationships strategic partnerships vs transactional contracts?",
+                                "scoreLabels": {
+                                        "0": "No vendor strategy",
+                                        "1": "Transactional only",
+                                        "2": "Moving toward partnerships",
+                                        "3": "Strategic partnerships established"
+                                }
+                        },
+                        {
+                                "text": "Is there multi-vendor integration and orchestration capability?",
+                                "scoreLabels": {
+                                        "0": "Single vendor only",
+                                        "1": "Limited multi-vendor",
+                                        "2": "Basic integration",
+                                        "3": "Multi-vendor orchestration"
+                                }
+                        },
+                        {
+                                "text": "Are SLAs outcome-based rather than activity-based?",
+                                "scoreLabels": {
+                                        "0": "No SLAs",
+                                        "1": "Activity-based SLAs only",
+                                        "2": "Mix of activity and outcome",
+                                        "3": "Value-based commercial models"
+                                }
+                        },
+                        {
+                                "text": "Is vendor performance regularly reviewed and optimised?",
+                                "scoreLabels": {
+                                        "0": "No performance review",
+                                        "1": "Annual reviews only",
+                                        "2": "Quarterly reviews",
+                                        "3": "Continuous performance management"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_19",
+                "name": "Change Management",
+                "category": "Change Enablement & Business Value",
+                "questions": [
+                        {
+                                "text": "Is there a change management strategy with stakeholder engagement?",
+                                "scoreLabels": {
+                                        "0": "No change strategy",
+                                        "1": "Ad-hoc change activities",
+                                        "2": "Basic change plan",
+                                        "3": "Comprehensive change strategy"
+                                }
+                        },
+                        {
+                                "text": "Are change champions identified and empowered across the organisation?",
+                                "scoreLabels": {
+                                        "0": "No change champions",
+                                        "1": "Champions identified",
+                                        "2": "Some champions active",
+                                        "3": "Change network actively driving adoption"
+                                }
+                        },
+                        {
+                                "text": "Is user adoption measured and actively managed?",
+                                "scoreLabels": {
+                                        "0": "No adoption measurement",
+                                        "1": "Anecdotal feedback only",
+                                        "2": "Basic adoption tracking",
+                                        "3": "Comprehensive adoption tracking with intervention analysis"
+                                }
+                        },
+                        {
+                                "text": "Are communication plans executed with multiple channels and feedback loops?",
+                                "scoreLabels": {
+                                        "0": "No communication plan",
+                                        "1": "Single-channel communication",
+                                        "2": "Multi-channel approach",
+                                        "3": "Integrated communication ecosystem"
+                                }
+                        },
+                        {
+                                "text": "Is resistance to change addressed through involvement and co-creation?",
+                                "scoreLabels": {
+                                        "0": "Resistance ignored",
+                                        "1": "Top-down change only",
+                                        "2": "Some stakeholder involvement",
+                                        "3": "User-led design and implementation"
+                                }
+                        }
+                ]
+        },
+        {
+                "id": "brick_20",
+                "name": "Sustainability",
+                "category": "Ecosystem, Sustainability & ESG",
+                "questions": [
+                        {
+                                "text": "Are sustainable practices embedded in architecture decisions?",
+                                "scoreLabels": {
+                                        "0": "No sustainability consideration",
+                                        "1": "Occasional consideration",
+                                        "2": "Sustainability as factor",
+                                        "3": "Embedded in architecture decisions"
+                                }
+                        },
+                        {
+                                "text": "Is technology enabling broader ESG goals?",
+                                "scoreLabels": {
+                                        "0": "No ESG enablement",
+                                        "1": "Technology neutral to ESG",
+                                        "2": "Some ESG support",
+                                        "3": "Technology driving ESG transformation"
+                                }
+                        },
+                        {
+                                "text": "Is there measurement and reporting on digital sustainability?",
+                                "scoreLabels": {
+                                        "0": "No sustainability reporting",
+                                        "1": "Basic metrics collected",
+                                        "2": "Some sustainability reporting",
+                                        "3": "Comprehensive sustainability reporting"
+                                }
+                        }
+                ]
+        }
+];
+
+        let selectedBricks = [];
+        let currentQuestionIndex = 0;
+        let answers = {};
+        let allQuestions = [];
+        let contactDetails = null;
+
+        renderBricks();
+        loadProgress();
+
+        function renderBricks() {
+            const container = document.getElementById('bricksContainer');
+            const categories = {};
+
+            bricks.forEach(brick => {
+                if (!categories[brick.category]) {
+                    categories[brick.category] = [];
+                }
+                categories[brick.category].push(brick);
+            });
+
+            let html = '';
+            for (const [category, categoryBricks] of Object.entries(categories)) {
+                html += `
+                    <div class="category-section">
+                        <div class="category-header">${category}</div>
+                        <div class="bricks-grid">
+                            ${categoryBricks.map(brick => `
+                                <div class="brick" onclick="toggleBrick('${brick.id}')" id="${brick.id}">
+                                    <div class="brick-name">${brick.name}</div>
+                                    <div class="brick-count">${brick.questions.length} questions</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+        }
+
+        function toggleBrick(brickId) {
+            const brick = document.getElementById(brickId);
+            const index = selectedBricks.indexOf(brickId);
+            
+            if (index > -1) {
+                selectedBricks.splice(index, 1);
+                brick.classList.remove('selected');
+            } else {
+                selectedBricks.push(brickId);
+                brick.classList.add('selected');
+            }
+            saveProgress();
+        }
+
+        function selectAllBricks() {
+            selectedBricks = bricks.map(b => b.id);
+            bricks.forEach(brick => {
+                document.getElementById(brick.id).classList.add('selected');
+            });
+            saveProgress();
+        }
+
+        function deselectAllBricks() {
+            selectedBricks = [];
+            bricks.forEach(brick => {
+                document.getElementById(brick.id).classList.remove('selected');
+            });
+            saveProgress();
+        }
+
+        function startAssessment() {
+            if (selectedBricks.length === 0) {
+                alert('Please select at least one assessment area');
+                return;
+            }
+
+            allQuestions = [];
+            selectedBricks.forEach(brickId => {
+                const brick = bricks.find(b => b.id === brickId);
+                brick.questions.forEach((q, idx) => {
+                    allQuestions.push({
+                        brickId: brick.id,
+                        brickName: brick.name,
+                        category: brick.category,
+                        questionIndex: idx,
+                        ...q
+                    });
+                });
+            });
+
+            currentQuestionIndex = 0;
+            document.getElementById('totalQ').textContent = allQuestions.length;
+            renderQuestion();
+            switchTab(1);
+        }
+
+        function renderQuestion() {
+            const container = document.getElementById('questionContainer');
+            const q = allQuestions[currentQuestionIndex];
+            
+            // Set default score to 0 if no answer exists
+            if (answers[currentQuestionIndex] === undefined) {
+                answers[currentQuestionIndex] = 0;
+                saveProgress();
+            }
+            
+            document.getElementById('currentQ').textContent = currentQuestionIndex + 1;
+            const progress = ((currentQuestionIndex + 1) / allQuestions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+
+            const scoreLabels = q.scoreLabels || {
+                '0': 'Not Started / Not in Place',
+                '1': 'Initial Work / Ad Hoc / Informal',
+                '2': 'Developing / Partially Implemented',
+                '3': 'Defined / Mostly Implemented'
+            };
+
+            let html = `
+                <div class="question-area">
+                    <div class="area-label">${q.category} → ${q.brickName}</div>
+                    <div class="question-text">${q.text}</div>
+                    <div class="score-options">
+            `;
+
+            for (let score = 0; score <= 3; score++) {
+                const selected = answers[currentQuestionIndex] === score ? 'selected' : '';
+                html += `
+                    <div class="score-option ${selected}" onclick="selectScore(${score})">
+                        <div class="score-label">Score ${score}</div>
+                        <div class="score-description">${scoreLabels[score]}</div>
+                    </div>
+                `;
+            }
+
+            const naSelected = answers[currentQuestionIndex] === -1 ? 'selected' : '';
+            html += `
+                    <div class="score-option ${naSelected}" onclick="selectScore(-1)">
+                        <div class="score-label">N/A</div>
+                        <div class="score-description">Not Applicable</div>
+                    </div>
+                </div>
+            </div>
+            `;
+
+            container.innerHTML = html;
+
+            document.getElementById('finishButton').style.display = 
+                currentQuestionIndex === allQuestions.length - 1 ? 'block' : 'none';
+        }
+
+        function selectScore(score) {
+            answers[currentQuestionIndex] = score;
+            document.querySelectorAll('.score-option').forEach(opt => opt.classList.remove('selected'));
+            event.target.closest('.score-option').classList.add('selected');
+            saveProgress();
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < allQuestions.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            }
+        }
+
+        function showContactModal() {
+            document.getElementById('contactModal').classList.add('active');
+        }
+
+        function submitContact(event) {
+            event.preventDefault();
+            
+            try {
+                contactDetails = {
+                    name: document.getElementById('userName').value,
+                    email: document.getElementById('userEmail').value,
+                    company: document.getElementById('userCompany').value,
+                    phone: document.getElementById('userPhone').value,
+                    timestamp: new Date().toISOString()
+                };
+
+                localStorage.setItem('contactDetails', JSON.stringify(contactDetails));
+                
+                document.getElementById('contactModal').classList.remove('active');
+                calculateResults();
+                switchTab(2);
+            } catch (error) {
+                console.error('Error in submitContact:', error);
+                alert('An error occurred. Please try again.');
+            }
+        }
+
+        function calculateResults() {
+            try {
+                console.log('Calculating results...', {selectedBricks, answers, allQuestions: allQuestions.length});
+                const results = {};
+                
+                selectedBricks.forEach(brickId => {
+                    const brick = bricks.find(b => b.id === brickId);
+                    if (!brick) {
+                        console.error('Brick not found:', brickId);
+                        return;
+                    }
+                    
+                    const brickQuestions = allQuestions.filter(q => q.brickId === brickId);
+                    
+                    let sum = 0;
+                    let count = 0;
+                    
+                    brickQuestions.forEach(q => {
+                        const qIndex = allQuestions.indexOf(q);
+                        const answer = answers[qIndex];
+                        
+                        if (answer !== undefined && answer !== -1) {
+                            sum += answer;
+                            count++;
+                        }
+                    });
+                    
+                    const average = count > 0 ? sum / count : 0;
+                    const percentage = (average / 3) * 100;
+                    
+                    results[brickId] = {
+                        name: brick.name,
+                        category: brick.category,
+                        average: average,
+                        percentage: percentage,
+                        rag: getRAGStatus(percentage),
+                        ragColor: getRAGColor(percentage)
+                    };
+                });
+
+                console.log('Results calculated:', results);
+                renderResults(results);
+            } catch (error) {
+                console.error('Error in calculateResults:', error);
+                alert('Error calculating results: ' + error.message);
+            }
+        }
+
+        function getRAGStatus(percentage) {
+            if (percentage >= 75) return 'green';
+            if (percentage >= 50) return 'amber';
+            return 'red';
+        }
+
+        function getRAGColor(percentage) {
+            if (percentage >= 75) return 'var(--success-green)';
+            if (percentage >= 50) return 'var(--warning-amber)';
+            return 'var(--alert-red)';
+        }
+
+        function getRAGLabel(percentage) {
+            if (percentage >= 75) return 'Excellent Performance';
+            if (percentage >= 50) return 'Progressing Well';
+            return 'Needs Attention';
+        }
+
+        function renderResults(results) {
+            try {
+                console.log('Rendering results...', results);
+                const container = document.getElementById('resultsContainer');
+                
+                if (!container) {
+                    throw new Error('Results container not found');
+                }
+                
+                let totalSum = 0;
+                let totalCount = 0;
+                
+                Object.values(results).forEach(r => {
+                    totalSum += r.average;
+                    totalCount++;
+                });
+                
+                const overallAverage = totalCount > 0 ? totalSum / totalCount : 0;
+                const overallPercentage = (overallAverage / 3) * 100;
+                const overallRAG = getRAGStatus(overallPercentage);
+
+                let html = `
+                    <div class="summary-cards">
+                        <div class="summary-card">
+                            <div class="summary-label">Overall Score</div>
+                            <div class="summary-score rag-$${overallRAG}">${overallPercentage.toFixed(1)}%</div>
+                            <div class="summary-subscore">${overallAverage.toFixed(2)} / 3.0</div>
+                            <div style="margin-top: 10px; font-weight: 600;">${getRAGLabel(overallPercentage)}</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-label">Areas Assessed</div>
+                            <div class="summary-score">${totalCount}</div>
+                            <div class="summary-subscore">of 21 available</div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="summary-label">Questions Answered</div>
+                            <div class="summary-score">${allQuestions.length}</div>
+                            <div class="summary-subscore">total responses</div>
+                        </div>
+                    </div>
+
+                    <div class="rag-legend">
+                        <div class="rag-item">
+                            <div class="rag-color green"></div>
+                            <span><strong>Green (75-100% / 2.25-3.0):</strong> Excellent Performance</span>
+                        </div>
+                        <div class="rag-item">
+                            <div class="rag-color amber"></div>
+                            <span><strong>Amber (50-74% / 1.5-2.24):</strong> Progressing Well</span>
+                        </div>
+                        <div class="rag-item">
+                            <div class="rag-color red"></div>
+                            <span><strong>Red (0-49% / 0-1.49):</strong> Needs Attention</span>
+                        </div>
+                    </div>
+
+                    <div class="brick-wall">
+                        <div class="wall-title">Programme Health Visualisation</div>
+                        <div class="wall-container" id="wallContainer"></div>
+                    </div>
+                `;
+
+            const categories = {};
+            Object.values(results).forEach(r => {
+                if (!categories[r.category]) {
+                    categories[r.category] = [];
+                }
+                categories[r.category].push(r);
+            });
+
+            for (const [category, categoryResults] of Object.entries(categories)) {
+                const catAvg = categoryResults.reduce((sum, r) => sum + r.average, 0) / categoryResults.length;
+                const catPct = (catAvg / 3) * 100;
+                
+                html += `
+                    <div class="category-results">
+                        <div class="category-name">${category} — Average: ${catPct.toFixed(1)}% (${catAvg.toFixed(2)}/3.0) — ${getRAGLabel(catPct)}</div>
+                        <div class="brick-results-grid">
+                            ${categoryResults.map(r => `
+                                <div class="brick-result" style="border-left-color: ${r.ragColor}">
+                                    <div class="brick-result-header">
+                                        <span class="brick-result-name">${r.name}</span>
+                                        <span class="brick-result-score rag-${r.rag}">${r.percentage.toFixed(1)}%</span>
+                                    </div>
+                                    <div style="color: var(--gray); font-size: 0.9em; font-family: 'IBM Plex Mono', monospace;">${r.average.toFixed(2)} / 3.0 — ${getRAGLabel(r.percentage)}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+            renderBrickWall(categories);
+            console.log('Results rendered successfully');
+        } catch (error) {
+            console.error('Error in renderResults:', error);
+            const container = document.getElementById('resultsContainer');
+            if (container) {
+                container.innerHTML = `
+                    <div style="padding: 40px; text-align: center; background: #fff3cd; border: 2px solid #ffc107; border-radius: 8px;">
+                        <h3 style="color: #856404; margin-bottom: 15px;">Error Loading Results</h3>
+                        <p style="color: #856404;">There was an error calculating your results. Please try again or contact support.</p>
+                        <p style="color: #856404; margin-top: 10px; font-family: monospace; font-size: 0.9em;">${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+        }
+
+        function renderBrickWall(categories) {
+            const container = document.getElementById('wallContainer');
+            
+            // Find max number of bricks in any category
+            let maxBricks = 0;
+            for (const categoryResults of Object.values(categories)) {
+                maxBricks = Math.max(maxBricks, categoryResults.length);
+            }
+
+            let html = '';
+            for (const [category, categoryResults] of Object.entries(categories)) {
+                html += `<div class="wall-column">`;
+                html += `<div class="wall-category-label">${category}</div>`;
+                
+                // Add bricks
+                categoryResults.forEach(r => {
+                    html += `
+                        <div class="wall-brick" style="background: ${r.ragColor}" 
+                             title="${r.name}: ${r.percentage.toFixed(1)}% (${r.average.toFixed(2)}/3.0) - ${getRAGLabel(r.percentage)}">
+                            ${r.name}<br><strong>${r.percentage.toFixed(1)}%</strong>
+                        </div>
+                    `;
+                });
+                
+                // Add empty spacers to align
+                const spacersNeeded = maxBricks - categoryResults.length;
+                for (let i = 0; i < spacersNeeded; i++) {
+                    html += `<div class="wall-brick" style="background: transparent; visibility: hidden; min-height: 80px;"></div>`;
+                }
+                
+                html += `</div>`;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function exportResults() {
+            const exportData = {
+                assessmentDate: new Date().toISOString(),
+                contactDetails: contactDetails,
+                selectedBricks: selectedBricks,
+                answers: answers,
+                allQuestions: allQuestions.map(q => ({
+                    category: q.category,
+                    brick: q.brickName,
+                    question: q.text,
+                    answer: answers[allQuestions.indexOf(q)]
+                }))
+            };
+
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `transformation-assessment-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+        }
+
+        function switchTab(index) {
+            document.querySelectorAll('.tab').forEach((tab, i) => {
+                tab.classList.toggle('active', i === index);
+            });
+            document.querySelectorAll('.tab-content').forEach((content, i) => {
+                content.classList.toggle('active', i === index);
+            });
+        }
+
+        function saveProgress() {
+            localStorage.setItem('assessmentProgress', JSON.stringify({
+                selectedBricks,
+                answers,
+                currentQuestionIndex
+            }));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('assessmentProgress');
+            if (saved) {
+                const data = JSON.parse(saved);
+                selectedBricks = data.selectedBricks || [];
+                answers = data.answers || {};
+                currentQuestionIndex = data.currentQuestionIndex || 0;
+                
+                selectedBricks.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.classList.add('selected');
+                });
+            }
+
+            const savedContact = localStorage.getItem('contactDetails');
+            if (savedContact) {
+                contactDetails = JSON.parse(savedContact);
+            }
+        }
+    </script>
+</body>
+</html>
